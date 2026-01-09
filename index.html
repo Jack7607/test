@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ubgames</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui}
+body{background:#000;color:#fff;display:flex;height:100vh;overflow:hidden}
+
+/* SIDEBAR */
+.sidebar{
+  width:72px;background:#060606;border-right:1px solid #1a1a1a;
+  display:flex;flex-direction:column;align-items:center;padding-top:14px
+}
+.icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+border-radius:12px;margin:6px 0;cursor:pointer;opacity:.75}
+.icon:hover{background:#141414;opacity:1}
+
+/* MAIN */
+.main{flex:1;overflow-y:auto}
+
+/* TOP BAR */
+.topbar{
+  display:flex;align-items:center;gap:16px;
+  padding:14px 20px;border-bottom:1px solid #1a1a1a
+}
+.logo{font-weight:700;font-size:20px}
+.search{
+  flex:1;background:#111;border:none;padding:12px 18px;
+  border-radius:999px;color:#fff
+}
+.search::placeholder{color:#777}
+.allbtn{background:#111;padding:10px 14px;border-radius:12px;font-size:13px}
+
+/* HERO */
+.hero{
+  margin:18px 20px;
+  background:linear-gradient(135deg,#7f1fff,#00c2a8);
+  border-radius:22px;padding:28px;height:160px;
+  display:flex;flex-direction:column;justify-content:center
+}
+.hero h1{font-size:26px;margin-bottom:10px}
+.hero button{
+  width:max-content;background:rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.25);
+  color:#fff;padding:10px 16px;border-radius:12px;cursor:pointer
+}
+
+/* SECTIONS */
+.section{padding:14px 20px}
+.section h2{font-size:18px;margin-bottom:12px}
+
+/* GRID ROWS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:14px
+}
+
+/* GAME CARD */
+.card{
+  height:110px;background:#141414;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;font-size:13px;cursor:pointer;
+  transition:.25s ease
+}
+.card:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 25px rgba(255,255,255,.18)
+}
+
+/* PLAYER */
+.player{
+  position:fixed;inset:0;background:#000;
+  display:none;flex-direction:column;z-index:999
+}
+.player-top{
+  background:#111;padding:12px 18px;
+  display:flex;justify-content:space-between
+}
+.player iframe{flex:1;border:none}
+.close{cursor:pointer;color:#ff5c5c}
+.hidden{display:none}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="icon" onclick="scrollToSection('popular')">🏠</div>
+  <div class="icon" onclick="scrollToSection('retro')">🔥</div>
+  <div class="icon" onclick="scrollToSection('action')">🎯</div>
+  <div class="icon" onclick="scrollToSection('driving')">🚗</div>
+</div>
+
+<div class="main">
+
+<!-- TOP -->
+<div class="topbar">
+  <div class="logo">🍑 ubgames</div>
+  <input class="search" id="search" placeholder="Search for a game">
+  <div class="allbtn">All Games ⌄</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>See what's popular right now</h1>
+  <button onclick="scrollToSection('popular')">🔥 View popular</button>
+</div>
+
+<!-- POPULAR -->
+<div class="section" id="popular">
+<h2>Popular</h2>
+<div class="grid">
+  <div class="card game" data-name="Masked Forces"
+   onclick="play('https://www.onlinegames.io/games/2022/unity2/masked-special-forces/index.html')">
+   Masked Forces
+  </div>
+</div>
+</div>
+
+<!-- RETRO -->
+<div class="section" id="retro">
+<h2>Retro</h2>
+<div class="grid">
+  <div class="card game" data-name="Tekken 3" onclick="play('https://www.retrogames.cc/embed/40238-tekken-3.html')">Tekken 3</div>
+  <div class="card game" data-name="Street Fighter II" onclick="play('https://www.retrogames.cc/embed/10030-street-fighter-ii-champion-edition-street-fighter-2-920513-etc.html')">Street Fighter II</div>
+  <div class="card game" data-name="FIFA 2000" onclick="play('https://www.retrogames.cc/embed/17484-fifa-2000-usa.html')">FIFA 2000</div>
+  <div class="card game" data-name="DBZ Supersonic" onclick="play('https://www.retrogames.cc/embed/28096-dragon-ball-z-supersonic-warriors-k-projectg.html')">DBZ Supersonic</div>
+</div>
+</div>
+
+<!-- ACTION -->
+<div class="section" id="action">
+<h2>Action / Shooter</h2>
+<div class="grid">
+  <div class="card game" data-name="Guerrillas.io" onclick="play('https://www.onlinegames.io/games/2023/unity2/guerrillas-io/index.html')">Guerrillas.io</div>
+  <div class="card game" data-name="Agent Smith" onclick="play('https://www.onlinegames.io/games/2021/unity/agent-smith/index.html')">Agent Smith</div>
+  <div class="card game" data-name="Zombie Defense" onclick="play('https://www.onlinegames.io/games/2022/unity/zombie-war-defense/index.html')">Zombie Defense</div>
+</div>
+</div>
+
+<!-- DRIVING -->
+<div class="section" id="driving">
+<h2>Driving / Racing</h2>
+<div class="grid">
+  <div class="card game" data-name="Drift Fury" onclick="play('https://www.onlinegames.io/games/2023/unity/drift-fury/index.html')">Drift Fury</div>
+  <div class="card game" data-name="Taxi Simulator" onclick="play('https://www.onlinegames.io/games/2022/unity/taxi-simulator/index.html')">Taxi Simulator</div>
+  <div class="card game" data-name="Crazy Moto Racing" onclick="play('https://cloud.onlinegames.io/games/2022/unity3/crazy-moto-racing/index-og.html')">Crazy Moto Racing</div>
+</div>
+</div>
+
+</div>
+
+<!-- PLAYER -->
+<div class="player" id="player">
+  <div class="player-top">
+    <div>Now Playing</div>
+    <div class="close" onclick="closePlayer()">✖ Close</div>
+  </div>
+  <iframe id="frame" allowfullscreen></iframe>
+</div>
+
+<script>
+function play(url){
+  frame.src=url;
+  player.style.display="flex";
+}
+function closePlayer(){
+  frame.src="";
+  player.style.display="none";
+}
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+/* REAL SEARCH */
+const search=document.getElementById("search");
+const games=document.querySelectorAll(".game");
+search.addEventListener("input",()=>{
+  const q=search.value.toLowerCase();
+  games.forEach(g=>{
+    g.style.display = g.dataset.name.toLowerCase().includes(q) ? "flex":"none";
+  });
+});
+</script>
+
+</body>
+</html>
